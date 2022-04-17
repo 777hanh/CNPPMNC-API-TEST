@@ -7,7 +7,7 @@ const route = require('./routes')
 require('dotenv').config({path:__dirname+'/.env'})
 
 const app = express()
-const PORT = process.env.PORT || 5000
+const port = process.env.PORT || 5000
 
 app.use(express.json())
 app.use(express.urlencoded({
@@ -19,4 +19,4 @@ db.connect();
 route(app)
 
 
-app.listen(PORT,()=>{console.log(`server listen at http://localhost:${PORT}`)})
+app.listen(port,()=>{console.log(`server listen at http://localhost:${port}`)})
