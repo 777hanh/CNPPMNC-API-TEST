@@ -1,4 +1,4 @@
-// const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore');
+const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore');
 
 class StudentController {
     //api/v1/
@@ -10,7 +10,7 @@ class StudentController {
     async testR(req, res) {
         const db = getFirestore();
         const studentId = +req.params.studentId;
-        const userRef = await db.collection('users').where('studentId', '==', studentId).get();
+        const userRef = await db.collection('students').where('studentId', '==', studentId).get();
         // const userRef = await db.collection('users').doc(`5c81f2e0-bcb7-11ec-90f4-d38e32f5e14e`).get();
         if (userRef.empty) {
             return res.json({ success: false, message: 'student not found . . .' });
@@ -28,7 +28,7 @@ class StudentController {
         // res.json({ success: true, message: 'demo-Read-All Work!' })
         const db = getFirestore();
 
-        const snapshot = await db.collection('users').get();
+        const snapshot = await db.collection('students').get();
         // const snapshot = await db.collection('users').listDocuments();
         if (snapshot.empty) {
             res.json({ success: false, message: 'no matching documents' })
@@ -44,13 +44,13 @@ class StudentController {
         //change string to number
         var studentId = +req.body.studentId;
         //check studentId is exists
-        const check = await db.collection('users').where('studentId', '==', studentId).get();
+        const check = await db.collection('students').where('studentId', '==', studentId).get();
         //if student is exist
         if (!check.empty) {
             return res.json({ success: false, message: 'student already exists' })
         }
         else {
-            const userRef = db.collection('users').doc(req.body.studentId.toString());
+            const userRef = db.collection('students').doc(req.body.studentId.toString());
             await userRef.set(req.body)
                 .then(() => { res.json({ success: true, message: 'Create successfully 0!', user: req.body }) })
                 .catch(err => { res.json({ success: false, message: err.message }) });
@@ -61,7 +61,7 @@ class StudentController {
     async testU(req, res) {
         const db = getFirestore();
         const studentId = +req.params.studentId;
-        const userRef = await db.collection('users').where('studentId', '==', studentId).get();
+        const userRef = await db.collection('students').where('studentId', '==', studentId).get();
         if(userRef.empty){
             return res.json({ success: false, message: 'student not found . . .'});
         }
@@ -73,7 +73,7 @@ class StudentController {
 
         //update document
         req.body.studentId = studentId;
-        await db.collection('users').doc(docId).update(req.body)
+        await db.collection('students').doc(docId).update(req.body)
             .then(() => {
                 var dataOfStudent;
                 userRef.forEach(doc => {

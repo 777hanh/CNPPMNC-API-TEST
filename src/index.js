@@ -3,7 +3,7 @@ const cors = require ('cors');
 // const db = require('./config/firebase/index');
 const dbM = require('./config/mongoose/index-mongodb')
 
-// const db = require('./config/db/index')
+const db = require('./config/firebase/index')
 
 const route = require('./routes')
 require('dotenv').config({path:__dirname+'/.env'})
@@ -17,7 +17,7 @@ app.use(express.urlencoded({
   }));
   
 app.use(cors())
-// db.connect();
+db.connect();
 dbM.connectM();
 
 route(app)

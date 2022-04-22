@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 //import controller or middleware
-const studentController = require('../app/controllers/studentController');
+const studentController = require('../app/controllers/studentControllerF');
 
 //api
 router.get('/test', studentController.test);
