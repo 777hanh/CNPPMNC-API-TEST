@@ -6,11 +6,11 @@ const studentController = require('../app/controllers/studentController');
 
 //api
 router.get('/test', studentController.test);
-router.post('/testC', studentController.testC);
-router.get('/testR/:studentId', studentController.testR);
-router.get('/testRA/', studentController.testRA);
-router.put('/testU/:studentId', studentController.testU);
-router.delete('/testD/:studentId', studentController.testD);
+router.post('/testc', studentController.testC);
+router.get('/testr/:studentId', studentController.testR);
+router.get('/testra/', studentController.testRA);
+router.put('/testu/:studentId', studentController.testU);
+router.delete('/testd/:studentId', studentController.testD);
 
 //export
 module.exports = router;
